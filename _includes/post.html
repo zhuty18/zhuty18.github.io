@@ -1,0 +1,15 @@
+<li>
+  {% assign post = include.post %}
+  <span class="post-meta">
+    <span class="date">{{ post.date | date: site.date_format }}</span>
+  </span>
+  <h2>
+    <a
+      class="post-link"
+      href="{{ site.baseurl }}{{ post.target }}"
+      title="{{ post.title }}">{{ post.title }}</a>
+  </h2>
+  <div class="post-preview">
+    {{ post.excerpt | markdownify | truncatewords: site.excerpt_word }}
+  </div>
+</li>

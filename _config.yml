@@ -8,3 +8,5 @@ title: 狡兔百窟
 description: 兔子草的个人主页
 
 show_downloads: false
+date_format: "%Y. %-m. %-d"
+excerpt_word: 300

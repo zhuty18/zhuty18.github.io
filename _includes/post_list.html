@@ -1,0 +1,14 @@
+<div class="post">
+  <h2>
+    {% if include.list_title %}
+      {{ include.list_title }}
+    {% else %}
+      最近更新
+    {% endif %}
+  </h2>
+  <ul class="post-list">
+    {% for post in site.posts %}
+      {% include post.html post=post %}
+    {% endfor %}
+  </ul>
+</div>
