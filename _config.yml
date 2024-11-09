@@ -1,7 +1,7 @@
 domain: zhuty18.github.io       # if you want to force HTTPS, specify the domain without the http at the start, e.g. example.com
 url: https://zhuty18.github.io  # the base hostname and protocol for your site, e.g. http://example.com
 baseurl: /      # place folder name if the site is served in a subfolder
-remote_theme: pages-themes/slate@v0.2.0
+remote_theme: pages-themes/cayman@v0.2.0
 plugins:
 - jekyll-remote-theme
 title: 狡兔百窟
@@ -14,3 +14,17 @@ excerpt_word: 300
 future: true
 
 redirect_back: /
+
+nav-foot:
+- name: ⬆️
+  link: "#content"
+- name: 🏠
+  link: /docs
+
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "custom_default"
+  

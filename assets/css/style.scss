@@ -3,12 +3,33 @@
 
 @import "{{ site.theme }}";
 
-header,
-.header_wrap,
 footer,
-.site-footer,
-.footer_wrap,
-#forkme_banner,
-a#forkme_banner {
+.btn {
     display: none;
+}
+
+.nav-foot {
+    display: grid;
+    justify-content: center;
+    background-image: linear-gradient(150deg, #159957, #021f11);
+    position: fixed;
+    bottom: 3rem;
+    right: 0rem;
+    opacity: 80%;
+}
+
+.nav-foot div {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-content: center;
+    display: flex;
+}
+
+a.nav-foot-link {
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 2.5rem;
+    text-align: center;
 }
