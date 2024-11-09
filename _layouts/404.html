@@ -1,0 +1,15 @@
+<h1>重定向</h1>
+文件已移动，重定向中...
+<button onclick="jump_to('{{ site.baseurl }}{{ site.redirect_back }}')">点此跳转</button>
+
+<script>
+    function jump_to (back) {
+        var target = back
+        at = window.location.pathname
+        if (!at.startsWith(back)) {
+            target = back + at
+        }
+        window.location.href = target
+    }
+    setTimeout(jump_to('{{ site.baseurl }}{{ site.redirect_back }}'), 0)
+</script>
