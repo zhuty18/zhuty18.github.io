@@ -6,11 +6,12 @@ import subprocess
 import time
 
 POST_PATH = "_posts/"
-PREVIEW_LENGTH = 300
+PREVIEW_LENGTH = 120
 
 
 def preview(filename):
     """获取文件预览"""
+    print(filename)
     with open(filename, "r", encoding="utf8") as f:
         yaml = False
         pre = ""
@@ -66,7 +67,7 @@ def post(filename):
             date = t.split()[1][1:-1]
             break
 
-    target = filename.replace(".md", "")
+    target = filename.replace(".md", "").replace("\\", "/")
     if target.endswith("."):
         target = target[:-1] + "/html"
 
@@ -99,7 +100,7 @@ def post_dir(path):
 if __name__ == "__main__":
     if not os.path.exists(POST_PATH):
         os.mkdir(POST_PATH)
-    skip_dirs = [".git", "_includes", "_layouts"]
+    skip_dirs = [".git", "_includes", "_layouts", "_posts"]
     for i in os.listdir("./"):
         if os.path.isdir(i) and i not in skip_dirs:
-            post_dir(os.path.join("./", i))
+            post_dir(os.path.join(i))
