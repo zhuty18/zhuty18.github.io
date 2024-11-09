@@ -21,6 +21,13 @@ def preview(filename):
                 continue
             if yaml:
                 continue
+            if "<!-- " in l:
+                if " -->" in l:
+                    continue
+                yaml = True
+            if " -->" in l:
+                yaml = False
+                continue
             if l.startswith("#"):
                 pre += "<br>\n"
                 continue
