@@ -11,3 +11,4 @@ show_downloads: false
 github.is_project_page: false
 date_format: "%Y. %-m. %-d"
 excerpt_word: 300
+future: true
