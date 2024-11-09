@@ -3,9 +3,11 @@
 
 @import "{{ site.theme }}";
 
+header,
+.header_wrap,
 footer,
 .site-footer,
-.footer_wrap {
-    height: 0pt;
-    width: 0pt;
+.footer_wrap,
+#forkme_banner {
+    display: none;
 }
