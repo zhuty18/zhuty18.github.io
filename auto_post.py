@@ -76,7 +76,6 @@ def post(filename):
     with open(os.path.join(POST_PATH, post_name), "w", encoding="utf8") as f:
         f.write(
             f"""---
-layout: forward
 target: /{target}
 title: {title}
 date: {date}
