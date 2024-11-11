@@ -2,6 +2,10 @@
 layout: home
 ---
 
-# 个人存档
+# 兔子草的主页
 
-[个人线上存档](aoom/docs)
+## 绿灯侠游戏
+
+[合成大莫戈](mogo)
+
+[合成小哈尔](mogo/hal.html)
