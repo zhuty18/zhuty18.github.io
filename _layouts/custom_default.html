@@ -9,13 +9,13 @@ layout: default
     {% if item.id %}
       <div id="{{ item.id }}">
         <script>
-            var con=document.getElementById('{{ item.id }}')
-            var tar="{{ item.link }}"
-            if (!window.location.pathname.endsWith('{{ item.con }}')){
-                tar="{{ item.other }}"
-            }
-            con.insertAdjacentHTML('afterbegin',
-                "<a href="+tar+" class=\"nav-foot-link\">{{ item.name }}</a>")
+          var con = document.getElementById('{{ item.id }}')
+          var tar = "{{ item.link }}"
+          if (!window.location.pathname.endsWith('{{ item.con }}')) {
+            tar = "{{ item.other }}"
+          }
+          con.insertAdjacentHTML('afterbegin',
+              "<a href=" + tar + " class=\"nav-foot-link\">{{ item.name }}</a>")
         </script>
       </div>
     {% else %}

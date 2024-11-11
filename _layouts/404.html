@@ -7,13 +7,13 @@ layout: custom_default
 <button onclick="jump_to('{{ site.baseurl }}{{ site.redirect_back }}')">点此跳转</button>
 
 <script>
-    function jump_to (back) {
-        var target = back
-        at = window.location.pathname
-        if (!at.startsWith(back)) {
-            target = back + at
-        }
-        window.location.href = target
+  function jump_to (back) {
+    var target = back
+    at = window.location.pathname
+    if (!at.startsWith(back)) {
+      target = back + at
     }
-    setTimeout(jump_to('{{ site.baseurl }}{{ site.redirect_back }}'), 0)
+    window.location.href = target
+  }
+  setTimeout(jump_to('{{ site.baseurl }}{{ site.redirect_back }}'), 0)
 </script>
