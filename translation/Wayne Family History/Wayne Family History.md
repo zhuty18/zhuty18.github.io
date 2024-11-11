@@ -1,8 +1,4 @@
----
-title: Wayne Family History
----
-
-<!-- # Wayne Family History -->
+# Wayne Family History
 
 *Batman: Secret Files & Origins (1997)*的选段汉化。
 
