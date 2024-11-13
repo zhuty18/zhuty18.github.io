@@ -11,7 +11,6 @@ PREVIEW_LENGTH = 120
 
 def preview(filename):
     """获取文件预览"""
-    print(filename)
     with open(filename, "r", encoding="utf8") as f:
         yaml = False
         pre = ""
@@ -69,6 +68,7 @@ def post(filename):
         stdout=subprocess.PIPE,
     ) as pipe:
         output = pipe.communicate()[0].decode("utf8")
+        print(output)
     for t in output.split("\n"):
         if t.startswith("Date:"):
             date = t.split()[1][1:-1]
@@ -91,6 +91,7 @@ date: {date}
 {preview(filename)}
 """
         )
+    print(f"Posted: {post_name}")
 
 
 def post_dir(path):
