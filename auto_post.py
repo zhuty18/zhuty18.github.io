@@ -68,7 +68,6 @@ def post(filename):
         stdout=subprocess.PIPE,
     ) as pipe:
         output = pipe.communicate()[0].decode("utf8")
-        print(output)
     for t in output.split("\n"):
         if t.startswith("Date:"):
             date = t.split()[1][1:-1]
