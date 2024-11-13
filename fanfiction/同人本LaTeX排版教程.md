@@ -4,7 +4,7 @@ layout: latex
 
 # 同人本$\LaTeX$排版教程<!-- omit in toc -->
 
-本文为懂得$\LaTeX$基础命令、语法，准备以此为排版工具，制作**书籍类同人本**的玩家撰写。考虑了等宽文字与不等宽文字（通常就是中英文）掺杂的情况。有少量场景与操作系统有关，本文暂只有Windows的解决方案。
+本文为懂得$\LaTeX$基础命令、语法，准备以此为排版工具，制作**书籍类同人本**的玩家撰写。考虑了等宽文字与不等宽文字（通常就是中英文）掺杂的情况。有少量场景与操作系统有关，本文暂只包括Windows下的处理方案。
 
 其中不包含$\LaTeX$安装等入门内容。这部分教程在网上已经很多，不需要我再抄一遍。
 
@@ -22,29 +22,39 @@ layout: latex
 - [排版参数](#排版参数)
   - [小说](#小说)
   - [全网格化（进阶）](#全网格化进阶)
-- [字体设定](#字体设定)
-  - [字体入门](#字体入门)
-    - [字体类别](#字体类别)
-    - [字体风格](#字体风格)
-  - [`ctex`包介绍](#ctex包介绍)
-  - [字体名称查询](#字体名称查询)
-  - [外语字符字体配置](#外语字符字体配置)
-    - [连字（进阶）](#连字进阶)
-  - [中文字符字体配置](#中文字符字体配置)
-  - [字体选用建议](#字体选用建议)
-  - [外语字符配置中文字体](#外语字符配置中文字体)
-  - [字体找不到怎么办？](#字体找不到怎么办)
 - [文本导入](#文本导入)
+  - [格式转换](#格式转换)
   - [$\\LaTeX$正文语法入门](#latex正文语法入门)
 - [建立文档](#建立文档)
   - [文档类型和主字号](#文档类型和主字号)
-    - [字号使用](#字号使用)
+  - [中文处理：`ctex`包](#中文处理ctex包)
+    - [字号命令使用](#字号命令使用)
   - [纸张布局](#纸张布局)
     - [出血](#出血)
   - [各级标题](#各级标题)
   - [标题格式](#标题格式)
   - [换页](#换页)
   - [自动空白页](#自动空白页)
+- [字体设定](#字体设定)
+  - [字体入门](#字体入门)
+    - [字体类别](#字体类别)
+    - [字体风格](#字体风格)
+    - [字符集和编码表](#字符集和编码表)
+  - [`ctex`中的字体](#ctex中的字体)
+  - [常用字体获取](#常用字体获取)
+  - [字体名称](#字体名称)
+  - [字体配置](#字体配置)
+    - [路径法](#路径法)
+    - [安装法](#安装法)
+    - [安装法配置的字体找不到怎么办？](#安装法配置的字体找不到怎么办)
+  - [`fontspec`包字符字体配置](#fontspec包字符字体配置)
+    - [连字（进阶）](#连字进阶)
+  - [`ctex`包字体配置](#ctex包字体配置)
+  - [外语字符配置中文字体](#外语字符配置中文字体)
+  - [高级配置](#高级配置)
+    - [pdf阅览器](#pdf阅览器)
+    - [中文](#中文)
+    - [外语](#外语)
 - [页面排版](#页面排版)
   - [行高和段距](#行高和段距)
     - [行高](#行高)
@@ -176,7 +186,7 @@ $\LaTeX$是非常容易催生强迫症的，**千万不要追求完美**。谨�
 
 单行字数：A5这个纸张大小还没有充分利用人眼的视野空间，因此单行字数只受限于字体大小和文字区域的宽度，不需要考虑人眼阅读能力而额外分栏。通常的书籍是每行28~30个字，实际体验上，26~32都是可接受的。
 
-
+</br>
 
 具体选择什么样的参数，建议按自己的需求来决定。决定一个本子气质的是单页信息量（可以简单用行数*单行字数来量化）。同字号下，单页信息量越大，阅读体验越严肃；越小体验越活泼。比方说，一行18个字，2倍行高就可以轻松打造移动端的阅读体验。
 
@@ -204,284 +214,19 @@ $\LaTeX$是非常容易催生强迫症的，**千万不要追求完美**。谨�
 
 了解了以上内容后，就让我们进入正题，开始使用$\LaTeX$进行排版。
 
-## 字体设定
-
-如果你使用*Overleaf*在线编译，将无法安装自定义字体。
-
-### 字体入门
-
-#### 字体类别
-
-字体可以简单分为有衬线（Serif）和无衬线（Sans Serif，或简称为Sans）两类。衬线指的是笔画边角处的装饰，例如宋体是典型的衬线字体，而黑体是典型的无衬线字体。
-
-纸张上，有衬线的字体易读性更佳，一般用于正文中；无衬线字体更加醒目，可以用于标题。
-
-等宽字体（mono）指所有字母和符号都占据同样宽度的字体。对于中文等符号文字没有意义，咱天然就是等宽字体。对字母文字而言，等宽的易读性并不太好，应用场景很有限。除了故意模仿打字机的文字质感外，只有编程为了竖对齐使用等宽字体。
-
-#### 字体风格
-
-一个字体名是一个系列，其中往往有多个风格，最重要的是各种字重和斜体。
-
-字重：描述一个笔画有多粗。
-
-从轻到重（从细到粗）分别有：thin，extra light，light，regular(normal)，medium，semi bold，bold，heavy(black)。一个字体必然有字重关键词，留空时会自动使用regular。原则上的加粗行为就是字重从regular变成bold。如果一个字体没有bold字重，word还会用算法生成一种伪粗体。
-
-斜体：Italic，严格上来说应该叫意大利体。字母文字排版时产生的风格化方案，**中文其实没有斜体**，承担类似功能的是楷体或仿宋。
-
-不是所有字体都有意大利体，很多时候我们看到的也是算法计算的伪意大利体。方案是简单将字符拉斜一些，不涉及意大利体中常见的字形变化。这种伪意大利体其实才该叫斜体（Slanted）。但由于这些风格本身的舶来性，加之Slanted几乎没什么专门的用处，大家已经习惯将Italic称作斜体，因此我后文也沿用这种通俗的误称。
-
-### `ctex`包介绍
-
-$\LaTeX$需要`ctex`包来处理中文，需要`xelatex`或`lualatex`引擎才能编译。使用方法为
-
-```latex
-% 方案一
-% 在建立文档时指定使用ctex，Z代指文档类型
-\documentclass{ctexZ}
-
-% 方案二
-% 建立文档后引入包
-\usepackage{ctex}
-```
-
-方案一相当于建立中文文档，方案二相当于在英文文档里使用中文。方案一自动将所有预设词翻译为了中文，更加便捷；方案二在细节上更加通用。例如，按方案一生成的目录中，标题内“第x章”“第x部分”等字样需要用`\ctexset`命令来调整；而方案二可以用更加基础（i.e.与其他包兼容性更好）的方式对这些地方进行自定义。
-
-`ctex`包默认根据**当前操作系统**选择字体配置，策略如下
-
-![ctex预设包](data/ctex.png)
-
-`ctex`包内有若干套预设好的字体配置，可在导入时使用`[fontset=X]`选择，`X`为包名，详见下表。
-
-|包名（`X`）|使用字体|版权|
-|:-----------:|:--:|:--:|
-|`adobe`|Adobe公司的四款中文字体|付费商用|
-|`Fandol`|*Fandol*中文字体|GPL+FE协议开源：放入文档中可以随意使用✅</br>基于此字体改编、修改等所有再创作的字体产品，均必须同样继承GPL+FE协议开源|
-|`founder`|方正公司的中文字体|书宋/黑体/楷体/仿宋四种为免费商用✅</br>原则上需要申请一份书面授权书|
-|`mac`|macOS系统下的字体|印刷时存在侵权问题|
-|`macnew`|ElCapitan或之后的多字重华文字体和苹方字体|见上|
-|`macold`|Yosemite或之前的华文字体。|见上|
-|`ubuntu`|思源宋体、思源黑体和$\TeX$发行版自带的文鼎楷体|免费商用✅|
-|`windows`|中易字体和微软雅黑字体|付费商用|
-
-*TeXLive*自带字库中包含*Fandol*系列，各平台均可`[fontset=fandol]`加载全套*Fandol*字体配置，简单达到跨平台统一。但是它只含GB2312内的字符，可能会出现缺字。如果出现这种问题的话，还是只能自行配置字体。
-
-### 字体名称查询
-
-首先是寻找字体。代码寻找字体需要使用字体的系统名称，在Windows中，简单的查找系统字体方法是运行`fc-list`命令。注意$\LaTeX$只能找到$\LaTeX$内自带的字体和`C:\Windows\Fonts\`目录下的字体。因此安装字体时，需要选择**为所有用户安装**。
-
-可以用系统命令`fc-list >> fonts.txt`生成一个字体表文件，包括系统上的可用字体。增加`:lang-zh`参数可以指定过滤筛选中文字体。注意一些字体虽然使用时是中文，但其字体文件会被识别为日文或韩文，不会出现在结果中。确定**英文系列名**时，可以用`fc-list | Select-String "系列名"`来筛选字体列表。中文名可能会是乱码，建议只用英文名进行此项操作。
-
-得出的结果中包含字体名，这里使用开源字体*Vollkorn*系列举例，`fc-list | Select-String "Vollkorn"`得到的结果如下
-
-```log
-C:/Windows/fonts/Vollkorn-Medium.otf: Vollkorn,Vollkorn Medium:style=Medium,Regular
-C:/Windows/fonts/Vollkorn-Italic.otf: Vollkorn:style=Italic
-C:/Windows/fonts/Vollkorn-Bold.otf: Vollkorn:style=Bold
-C:/Windows/fonts/Vollkorn-MediumItalic.otf: Vollkorn,Vollkorn Medium:style=Medium Italic,Italic
-C:/Windows/fonts/Vollkorn-BoldItalic.otf: Vollkorn:style=Bold Italic
-C:/Windows/fonts/Vollkorn-Regular.otf: Vollkorn:style=Regular
-C:/Windows/fonts/Vollkorn-SemiboldItalic.otf: Vollkorn,Vollkorn Semibold:style=Semibold Italic,Italic
-C:/Windows/fonts/Vollkorn-Semibold.otf: Vollkorn,Vollkorn Semibold:style=Semibold,Regular
-```
-
-其中`*.otf:`和`:style`之间的即为字体在系统里的名称。对于字体的特殊风格，可以直接以`字体名 风格`作为字体名加载，如`Vollkorn Semibold Italic`。切记区分大小写，有的字体里会是`SemiBold`，有的是`Semibold`。
-
-注：一些字体名中含有`-`，在打印时会增加转义符显示为`\-`，使用这些字体时输入`-`即可。
-
-另外，也可以使用[FontDrop!](https://fontdrop.info)网站解析单个字体文件，获得字体名。解析样例字体*EBGaramondSC12-Regular.otf*时结果如下。
-
-```log
-You see EB Garamond SC
-
-Name: EB Garamond SmallCaps 12 Regular. Style name: 12 Regular. Version 0.016
-© Created by Georg Duffner with FontForge 2.0 (http://fontforge.sf.net)
-
-License: Copyright 2010-2013, Georg A. Duffner (<http://www.georgduffner.at/ebgaramond|g.duffner@gmail.com>), 2013 Siva Kalyan This Font Software 
-```
-
-其中`You see`后的是字体系列名，而`Name`与`. Style name`之间的即为字体本身在系统里的名称（对于风格字体，即为指定时使用的名称）。
-
-### 外语字符字体配置
-
-$\LaTeX$的字体配置默认是**只对部分字符生效**的，需要分别配置，混排时可以叠加指定。
-
-我们先说外语字符。`ctex`包只对中日韩三语起效，其他语言的字符（不止为ASCII，还包括章节符$\S$和摄氏度℃等符号）是默认使用基础字体渲染的，只有`fontspec`包配置的字体才能起效。
-
-```latex
-% 引入包
-\usepackage{fontspec}
-% 设置主字体
-\setmainfont{Vollkorn}
-```
-
-可以设置三种基础类别的字体：主字体`\setmainfont`用`\rmfamily`调用；无衬线字体`\setsansfont`用`\sffamily`调用；等宽字体`\setmonofont`用`\ttfamily`调用。一般设个主字体就够了，其他两种字体是默认格式中使用的，自定义格式时反正也要覆盖掉。
-
-用`\newfontfamily`配置新的字体。
-
-```latex
-% 设置字体，并自定义字体名\medfont
-\newfontfamily\medfont{Vollkorn Medium}
-```
-
-$\LaTeX$默认寻找同系列的字体作为其加粗和斜体，但可以自行进行指定。
-
-```latex
-% 设置字体，并自行配置加粗和斜体
-\newfontfamily\medfont{Vollkorn Medium}[BoldFont=Vollkorn Semibold, ItalicFont=Vollkorn Semibold Italic]
-```
-
-使用非主字体时，只需要输入配置时设定的字体名即可。
-
-```latex
-\begin{document}
-    % 一次性使用
-    \fontspec{Vollkorn medium}[...]
-    % 预先设定好
-    \medfont medium weight text
-\end{document}
-```
-
-#### 连字（进阶）
-
-英文衬线字体中存在连字（ligature），通过设计优化某些字符串的显示方式来提升易读性。最经典的三个案例如下图（字体为*Vollkorn*）。
-
-![连字样例](data/fil.png)
-
-$\LaTeX$默认载入一部分通用连字（OTF中tag为liga），能提升英文文本的易读性。而一些字体对连字的设计比较充分，还使用了其他的连字tag。通常类别有：clig指上下文连字（contextual），能使手写体中产生连笔；dlig指自由连字（discretionary），会使文字更花俏；hlig指历史连字（historical）能令文字看起来较为复古；rlig标记必需连字（Required），可以实现“将英语字母拼合得到其他字母”，例如ae拼合为æ。
-
-![连字配置](data/ligatures.png)
-
-配置时可以添加一个`[Ligatures=XXX]`参数，启用一些其他tag里的连字，见上图。其中Common是默认打开的。
-
-可以用[FontDrop!](https://fontdrop.info)这个网站来查看字体内连字。有些字体虽然设计了连字，但并没有正确标注，导致这些连字虽然存在但却无法使用。面对这种情况，可以用[FontForge](https://fontforge.org/en-US/)软件进行[手动标注](https://fontforge.org/docs/tutorial/editexample4.html)。
-
-### 中文字符字体配置
-
-中文字符，如`你`，`我`，`；`（中文分号），`？`（中文问号），均需要使用`ctex`包内的命令进行字体配置才能正常显示。
-
-如果使用`ctex`包字库的话，字体命令已经预定义好了。主字体默认为宋体，加粗为黑体，斜体为楷体，等宽（`\ttfamily`）为仿宋。
-
-```latex
-\songti 宋体
-\heiti 黑体
-\fangsong 仿宋
-\kaishu 楷书
-
-% 只对 windows、founder 和 macnew 字库生效
-\lishu 隶书
-\youyuan 幼圆
-```
-
-如果选择自定义，首先要引入包时用`[fontset=none]`避免加载默认字体集，防止产生冲突。
-
-```latex
-\documentclass[fontset=none]{ctexZ}
-% 或
-\usepackage[fontset=none]{ctex}
-```
-
-字体配置的命令和`fontspec`包的差不多，加个`CJK`即可配置中文、日文、或韩文的字体，配置出的字体只会对这三种语言内的字符生效。
-
-```latex
-% 主字体
-\setCJKmainfont{Source Han Serif}[BoldFont=Source Han Serif SemiBold, ItalicFont=FZKai-Z03]
-
-% 以下是六种常用的GBK免费商用中文字体
-
-% 思源系列字体有Source Han和Noto两个名字，是一样的
-% 通常有语言后缀，CN（中文）或SC（Simplified Chinese）都可以用
-\newCJKfontfamily\songti{Source Han Serif} % 思源宋体
-\newCJKfontfamily\sheiti{Source Han Sans} % 思源黑体
-
-% 可能会有S（简体）T（繁体）两种后缀，对应GB2312字符集，不建议用
-\newCJKfontfamily\shusong{FZShuSong-Z01}% 方正书宋
-\newCJKfontfamily\fangsong{FZFangSong-Z02} % 方正仿宋
-\newCJKfontfamily\heiti{FZHei-B01} % 方正黑体
-\newCJKfontfamily\kaiti{FZKai-Z03} % 方正楷体
-```
-
-其中，方正系列四个字体都只有一个字重，而思源两个系列都具有extralight，light，regular，medium，semibold，bold，heavy七个字重，可以进行指定。所有字体中都不含斜体。
-
-### 字体选用建议
-
-想看字体效果，先要有一个好使的pdf阅览器。
-
-打印的分辨率是300dpi，而屏幕的分辨率鲜少到达这个级别，屏幕上预览的pdf，精度比起打印机通常是压缩了的。由于渲染机制原因，不同pdf阅览器通常有着不同的压缩效果，建议找一个使用方便，且页面模式下与放大到300dpi下效果最相似的。个人经验中，Windows端的Acrobat DC Pro在英文花体字上发生了笔画显著过细的现象，而SumatraPDF和Edge，Firefox，Chrome均未出现此问题。
-
-- 中文
-
-中文的可选字体其实不少（[开源字体可以见此名单](https://drxie.github.io/OSFCC/)）。我并不大懂字体设计，仅从各方面收集到的资料来看，方正系的字体适用范围最广、知名度最高，设计应该是最佳的。复读，在找方正字体文件时请一定找GBK后缀（书宋为8.87M），而非GB2312或简体后缀（书宋为2.63M）。这样文字比较全。
-
-实际使用时，推荐将方正书宋（书宋即完全针对书籍印刷设计的宋体）作为主字体，指定方正楷体或仿宋作为斜体，以便于在正文中标注少量字符（如引用），这样易读性较佳。
-
-不过，方正书宋只有一个字重免费，固然技术上可以将较粗的思源宋体或方正黑体作为粗体使用，但因为细节差异众多，看起来会很古怪，并不推荐。如果对加粗有明确需求，请挑一款多字重的字体作为主字体。不过，依然可以搭配方正字体作为斜体。
-
-装饰性文字（脚注、页眉页脚等）建议使用方正仿宋或楷体。
-
-各级标题字体建议用不同字重的思源宋体来显示。
-
-思源系列开源，在网上版本很多，不好说谁做了哪些微调。对于一些字体，可以增加使用`[CharacterWidth=Full]`这个参数，来调整一些字符（通常为标点）的宽度。
-
-- 外语
-
-外语的免费字体很多，绝大部分都支持拉丁字母的变体（如é），一部分支持希腊和西里尔字母，选择字体时检查文本所用符号即可。在挑花眼的同时，最好也关注一下一些进阶选项，以提升混排效果。这里介绍一些实用的花招，更详细的推荐阅读`fontspec`包文档。
-
-以下是一些样例，中文使用思源宋体Regular；英文字体均是从网站[1001 Fonts](https://www.1001fonts.com)下载的免费商用字体，全部使用Regular字重的默认配置。
-
-![字体对比](data/fonts.png)
-
-思源宋体内置的拉丁字体更适合与中文在标题上并行，而非在正文里穿插使用，这就是为什么我推荐不同字体混排。
-
-*Neuton*的字母偏小。配置时可用`[Scale=比例]`参数放大。
-
-*EB Garamond*的字母与中文相当契合，但数字采用了与英文相同的三格设计（俗称OldStyle），在数字与汉字混排时看起来会很诡异。可使用`[Numbers=Lining]`切换到等高数字。注意此方案起效建立在字体中含有等高数字的前提下，不是所有字体都支持。
-
-*Spectral*的字距比起中文明显偏高。可使用`[LetterSpace=改变值（如-3）]`来降低字母间距。另，如果想要调整空格宽度，使用`[WordSpace=空格宽度]`参数即可。
-
-不过本质上，**混排字体的选择取决于文本的字符频**。如果文中存在大量字母（例如ABO中，Alpha/Beta/Omega三个单词会反复出现），那么就应当主要关注字母能否融入正文。
-
-### 外语字符配置中文字体
-
-有的中文字体中也一并包含了同风格的外语字符设计。如果需要使用，将其用`fontspec`包内命令加载，然后叠加使用即可。
-
-```latex
-\newfontfamily\songtien{Source Han Serif}
-
-\songti\songtien 中英文mixed文本
-```
-
-这样用起来很简单，但是不推荐，基本不太可能好看。
-
-### 字体找不到怎么办？
-
-第一步，确定字体确实安装在了`C:\Windows\Fonts`文件夹里。
-
-第二步，检查代码中的拼写和`fc-list`命令获得的一样，特别是大小写。
-
-第三步，在字体名称外面加个中括号。别问为什么，我也不知道，总而言之亲测有效。
-
-```latex
-% 修改前
-\newCJKfontfamily\xbsong{Source Han Serif SemiBold}
-% 修改后
-\newCJKfontfamily\xbsong{[Source Han Serif SemiBold]}
-```
-
-第四步，直接配置字体文件名。只要字体装进了默认路径，用这个方法就可以百分百找到。该方案只支持XeTeX和LuaTeX两个引擎，巧了，就是支持中文的两个引擎。
-
-```latex
-\newfontfamily\vollkorn{Vollkorn-Regular.otf}
-```
-
-第五步，用[FontDrop!](https://fontdrop.info)网站解析单个字体文件，获得字体名，和`fc-list`里获得的可能会不一样。
-
-第六步，天涯何处无芳草，字体到处都是，换一个吧。
-
 ## 文本导入
 
-对于已标记好的文本（包括但不限于.docx，.md，.rtf，.epub），用`pandoc`转化为.tex，然后手动检查一遍即可。如果连`pandoc`都懒得装，也有很多转化$\LaTeX$的网页工具。注意转化会完全继承原文档的格式，大部分时候会有冗余，手动清掉即可。
+注意，$\LaTeX$最好使用纯ASCII字符作为文件名和路径名，否则编译时可能出现乱码。
 
-中文和外语标点存在Unicode码重叠，自动转化工具通常会将标点按外语机制转化，并用外语字体进行渲染，**需要手动调整单引号**。转化机制不会区分单引号的正反，一律将行首的单引号自动转化为`` ` ``（一个英文反引号），其他单引号转化为`'`（一个英文单引号），因此会出现中文引号不配对的情况。在.tex文件中换回中文单引号即可解决问题。
+</br>
+
+### 格式转换
+
+对于已标记好格式的文本（包括但不限于.docx，.md，.rtf，.epub），可用各种免费网页工具或`pandoc`转化为.tex，然后手动检查。注意，转化会完全继承原文档的格式，导言区的内容大部分是冗余的，清掉即可。
+
+中文和外语标点存在一定的Unicode码重叠，自动转化工具通常会将标点按外语机制转化，并用外语字体进行渲染。
+
+其中，**单引号必须手动调整**。转化机制不区分单引号的正反，一律将行首的单引号自动转化为`` ` ``（一个英文反引号），其他单引号转化为`'`（一个英文单引号），因此会出现中文引号不配对的情况。在.tex文件中按原文换回中文单引号即可解决问题。
 
 其他标点的外语化仅会影响外语字体，看不顺眼的话，全文替换换回来即可。
 
@@ -504,12 +249,14 @@ $\LaTeX$默认载入一部分通用连字（OTF中tag为liga），能提升英�
 
     ```latex
     % 导言区
+    % 想立刻看编译效果的话，增加下面这行
+    % \documentclass{ctexbook}
     \begin{document}
         % 正文区
     \end{document}
     ```
 
-    导言区的内容在开始制作文档时即全部生效，而正文区的内容在$\TeX$编译到此处时才会起效。
+    $\TeX$会先按顺序加载导言区的内容，前文的定义将影响后文，后文可以覆盖前文。导言区全部加载后开始逐行制作文档，正文区的命令在$\TeX$处理到所在位置时起效。
 
 2. 正文
 
@@ -519,7 +266,7 @@ $\LaTeX$默认载入一部分通用连字（OTF中tag为liga），能提升英�
 
     单个回车在排版时会视作空格。
 
-    用`\\`可以在不换段的情况下换行。
+    用`\\`在不换段的情况下换行。
 
     加粗方法：`\textbf{加粗内容}`
 
@@ -541,27 +288,43 @@ $\LaTeX$默认载入一部分通用连字（OTF中tag为liga），能提升英�
 
     无序标题的标记方法是`\级别*{标题内容}`。不含序号标记，不会参与索引建立。
 
+</br>
+
 好了，你入门了。
 
 ## 建立文档
 
-在前文中，你可能已经建立过一些测试文件来研究代码了，在这一节中，我们所讨论的是正经的印刷文档。
-
 ### 文档类型和主字号
 
-文档类型通常放在文件第一行，较为直观，但不放在那里也行。
+文档类型通常在文件的第一行定义。
 
 ```latex
 \documentclass[10pt]{book}
 ```
 
-$\LaTeX$原生有着`article`、`book`、`report`三种文档类别，对应的`ctex`类分别为`ctexart`、`ctexbook`、`ctexrep`。三种类别的主要区别在默认层深和排版方式上，虽然排版之后肯定要自己改，但为了直观，本教程推荐使用`book`类。
+$\LaTeX$原生有着`article`、`book`、`report`三种文档类别。三种类别的主要区别在默认层深和排版方式上，虽然排版之后肯定要自己改，但为了直观，本教程推荐使用`book`类。
 
 `book`类默认支持三种正文字号10,11,12pt。三种字号可读性都属不错，不建议更大或者更小。如果一定想用其他的，可以使用`extbook`类文档，支持8,9,10,11,12,14,17,20pt的正文字号。
 
 具体选择时，可以用“磅数÷2.845=毫米数”来计算文字大小。也可参考word，word中的五号字是10.5磅，小四则是12磅。
 
-`ctex`文档类别除了10,11,12pt外，还支持word款的两种正文字号，配置方法如下
+### 中文处理：`ctex`包
+
+$\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要`xelatex`或`lualatex`引擎才能编译。使用方法为
+
+```latex
+% 方案一
+% 在建立文档时指定使用ctex，Z代指文档类型
+\documentclass{ctexZ}
+
+% 方案二
+% 建立文档后引入包
+\usepackage{ctex}
+```
+
+方案一相当于建立中文文档，方案二相当于在英文文档里使用中文。方案一自动将所有预设词翻译为了中文，更加便捷；方案二在细节上更加通用。例如，按方案一生成的目录中，标题内“第x章”“第x部分”等字样需要用`\ctexset`命令来调整；而方案二可以用更加基础（i.e.与其他包兼容性更好）的方式对这些地方进行自定义。
+
+`ctex`的文档类别除了10,11,12pt外，还支持word款的两种正文字号，配置方法如下
 
 ```latex
 % 正文五号字
@@ -570,17 +333,21 @@ $\LaTeX$原生有着`article`、`book`、`report`三种文档类别，对应的`
 \documentclass[zihao=-4]{ctexbook}
 ```
 
-#### 字号使用
+#### 字号命令使用
 
 ![字号](data/fontsize.png)
 
-在不同的文档字号时，各个字号命令的对应的字号如上图。
+在文档字号不同时，各个字号命令对应的字号如上图。此外，可以用`\fontsize`命令手动定义文字大小，如下。
 
-可以用`\ctexset{ziju=额外倍数}`来额外改变字距，但是不设定的话就是最好看的了。
+```latex
+\fontsize{字号}{所占高度}
+```
+
+对于中文，可以用`\ctexset{ziju=额外倍数}`来额外改变字距，但是不设定的话就是最好看的了。
 
 ### 纸张布局
 
-一般来说，同人文本的尺寸是A5左右。标准A5是148*210mm，实际中印厂的尺寸不一定能到这里，但我个人还是建议按标准尺寸来做设计，边距留一些余量，印厂不能满足的话再压缩。
+一般来说，同人文本的尺寸是A5左右。标准A5是148*210mm，实际中印厂的尺寸不一定能到这里，通常会更窄一些。但我个人还是建议按标准尺寸来做设计，外边距适当留一些余量（5~8mm即可）。
 
 `geometry`是处理布局的包，参数极多，这里只介绍少量常用内容，有其他需求建议阅读文档。
 
@@ -632,11 +399,11 @@ $\LaTeX$原生有着`article`、`book`、`report`三种文档类别，对应的`
 
 上述讲解的A5纸张所得到的是效果图，印刷时需要为印厂提供有`3mm`出血的版本。增加出血很简单，只需要将`paperwidth, paperheight`各增加`6mm`，**每一处**设置的`top, bottom, inner, outer, left, right`各增加`3mm`即可。`textwidth`和`textheight`两个参数不用改变。
 
-**在正文排版没有bug的情况下**，这样的修改可以在效果图四周都增加`3mm`的白边，中心对齐检阅时，文字位置完全不变。如果修改后有页面发生了移动，那么请在该页的写法上寻找问题。
+**在正文排版没有bug的情况下**，这样的修改可以在效果图四周都增加`3mm`的白边，同缩放比例中心对齐检阅时，文字位置完全不变。如果修改后有页面发生了移动，那么请在该页的写法上寻找问题。
 
 ### 各级标题
 
-`book`类可以使用所有种类的标题，直观地说，可以理解为一本大部头教学书的级别。对于小说，不建议使用超过两级的标题，只选用`part+chapter`或`chapter+section`即可。
+`book`类可以使用所有种类的标题，直观地说，可以理解为一本大部头学术书籍能涵盖的级别。对于小说，不建议使用超过两级的标题，只选用`part+chapter`或`chapter+section`即可。
 
 具体效果如下：
 
@@ -717,6 +484,339 @@ $\LaTeX$原生有着`article`、`book`、`report`三种文档类别，对应的`
     \blankpage
 \fi
 ```
+
+## 字体设定
+
+字体最好在排细节之前确定。不同字体文件的细节不同，换字体有可能导致文档的换行和换页发生改变，哪怕纯中文字体也是如此。
+
+### 字体入门
+
+#### 字体类别
+
+字体可以简单分为有衬线（Serif）和无衬线（Sans Serif，或简称为Sans）两类。衬线指笔画边角处的装饰，例如宋体是典型的衬线字体，而黑体是典型的无衬线字体。
+
+纸张上，有衬线的字体易读性更佳，一般用于正文中；无衬线字体更加醒目，可以用于封面或勒口。
+
+等宽字体（mono）指所有字母和符号都占据同样宽度的字体。通常说的“方块字文字”，字体基本是等宽的，只有标点有可能不等宽。对字母文字而言，等宽字体的易读性并不太好，应用场景很有限。除了故意模仿打字机的文字质感外，只有编程为了竖对齐使用等宽字体。
+
+#### 字体风格
+
+一个字体名是一个系列，其中往往有多个风格，最重要的是各种字重和斜体。
+
+字重：描述一个笔画有多粗。
+
+从轻到重（从细到粗）分别有：thin，extra light，light，regular(normal)，medium，semi bold，bold，heavy(black)。一个字体必然有字重关键词，留空时会自动使用regular。原则上的加粗行为就是字重从regular变成bold。如果一个字体没有bold字重，word还会用算法生成一种伪粗体。
+
+斜体：Italic，严格上来说应该叫意大利体。字母文字排版时产生的风格化方案，**中文其实没有斜体**，承担类似功能的是楷体或仿宋。
+
+不是所有字体都有意大利体，很多时候我们看到的也是算法计算的伪意大利体。方案是简单将字符拉斜一些，不涉及意大利体中常见的字形变化。这种伪意大利体其实才该叫斜体（Slanted）。但由于这些风格本身的舶来性，加之Slanted几乎没什么专门的用处，大家已经习惯将Italic称作斜体，因此我后文也沿用这种通俗的误称。
+
+#### 字符集和编码表
+
+字符集指字符本身；编码表指字符字形和字符代码的一一映射表。通常来说，一套字符标准是包含字符集和编码表的。但本章中仅介绍字体，因此只考虑字符的覆盖率，而不讨论编码（计算机在可以在兼容的编码表中做转换）。
+
+以下是一些常用的字符集。
+
+|字符集名称|内容|
+|:---:|:---|
+|ASCII|基础字符集，可见部分为美式键盘上能直接输入的字符。</br>此处的美式是与英式、法式、俄式等区分，中国能买到的键盘一般就是美式的。|
+|GB2312|中文基础字符集，含6763个汉字字符。兼容ASCII|
+|GBK|汉字扩展集，含21886个汉字字符。兼容GB2312|
+|GB18030|中文编码字符集，含87887个汉字字符，兼容GBK|
+|Unicode|国际字符表，基本含一切能用的字符和emoji，常用标准utf8兼容ASCII|
+
+### `ctex`中的字体
+
+`ctex`包默认根据**当前操作系统**选择字体配置，策略如下
+
+![ctex预设包](data/ctex.png)
+
+`ctex`包内有若干套预设好的字体配置，可在导入时使用`[fontset=X]`选择，`X`为包名，详见下表。
+
+|包名（`X`）|使用字体|版权|
+|:-----------:|:--:|:--:|
+|`adobe`|Adobe公司的四款中文字体|付费商用|
+|`Fandol`|*Fandol*中文字体|GPL+FE协议开源：放入文档中可以随意使用✅</br>基于此字体改编、修改等所有再创作的字体产品，均必须同样继承GPL+FE协议开源|
+|`founder`|方正公司的中文字体|书宋/黑体/楷体/仿宋四种为免费商用✅</br>原则上需要申请一份书面授权书|
+|`mac`|macOS系统下的字体|印刷时存在侵权问题|
+|`macnew`|ElCapitan或之后的多字重华文字体和苹方字体|见上|
+|`macold`|Yosemite或之前的华文字体。|见上|
+|`ubuntu`|思源宋体、思源黑体和$\TeX$发行版自带的文鼎楷体|免费商用✅|
+|`windows`|中易字体和微软雅黑字体|付费商用|
+
+*TeXLive*自带字库中包含*Fandol*系列，各平台均可`[fontset=fandol]`加载全套*Fandol*字体配置，简单达到跨平台统一。但是它只含GB2312内的字符，可能会出现缺字。如果出现这种问题的话，还是只能自行配置字体。
+
+### 常用字体获取
+
+外语字体可在[1001 Fonts](https://www.1001fonts.com/)上挑选。我推荐[EB Garamond](https://www.1001fonts.com/eb-garamond-font.html)，做到了拉丁、希腊、西里尔字母的全覆盖。
+
+思源系列开源：[思源宋体](https://github.com/adobe-fonts/source-han-serif/releases/latest)，[思源黑体](https://github.com/adobe-fonts/source-han-sans/releases/latest)
+
+方正系列官网需要登录等操作，这里给出第三方下载链接：[方正书宋](https://www.fonts.net.cn/font-31610316242.html)、[方正楷体](https://www.fonts.net.cn/font-31607222283.html)、[方正仿宋](https://www.fonts.net.cn/font-31602268591.html)、[方正黑体](https://www.fonts.net.cn/font-31609167689.html)。不确定网站可靠性，链接或许会失效。请注意，在找方正字体文件时请一定找GBK后缀（书宋字体文件8.87M），而非GB2312或简体后缀（书宋字体文件2.63M），预防字体缺字。
+
+### 字体名称
+
+$\LaTeX$配置字体时，名称可以使用字体专属名和文件名（含不含后缀均可）。
+
+字体专属名是嵌入字体文件内的，也是操作系统识别字体时所用的标识，以此配置较为稳定，可读性也较高。
+
+字体文件名是可以随意修改的，只建议在使用专属名出错或文件名容易检查时使用。
+
+在Windows中，简单的查找字体专属名称方法是运行`fc-list`命令，其覆盖范围与$\LaTeX$能检索的范围一致。
+
+可以用系统命令`fc-list >> fonts.txt`生成一个字体表文件，包括系统上的可用字体。增加`:lang-zh`参数可以指定过滤筛选中文字体。注意一些字体虽然使用时是中文，但其字体文件会被识别为日文或韩文，不会出现在结果中。确定**英文系列名**时，可以用`fc-list | Select-String "系列名"`来筛选字体列表。中文名可能会是乱码，建议只用英文名进行此项操作。
+
+得出的结果中包含字体名，这里使用开源字体*Vollkorn*系列举例，`fc-list | Select-String "Vollkorn"`得到的结果如下
+
+```log
+C:/Windows/fonts/Vollkorn-Medium.otf: Vollkorn,Vollkorn Medium:style=Medium,Regular
+C:/Windows/fonts/Vollkorn-Italic.otf: Vollkorn:style=Italic
+C:/Windows/fonts/Vollkorn-Bold.otf: Vollkorn:style=Bold
+C:/Windows/fonts/Vollkorn-MediumItalic.otf: Vollkorn,Vollkorn Medium:style=Medium Italic,Italic
+C:/Windows/fonts/Vollkorn-BoldItalic.otf: Vollkorn:style=Bold Italic
+C:/Windows/fonts/Vollkorn-Regular.otf: Vollkorn:style=Regular
+C:/Windows/fonts/Vollkorn-SemiboldItalic.otf: Vollkorn,Vollkorn Semibold:style=Semibold Italic,Italic
+C:/Windows/fonts/Vollkorn-Semibold.otf: Vollkorn,Vollkorn Semibold:style=Semibold,Regular
+```
+
+其中`*.otf:`和`:style`之间的`Vollkorn`即为字体在系统里的名称。对于字体的特殊风格，可以直接以`字体名 风格`作为字体名加载，如`Vollkorn Semibold Italic`。切记区分大小写，有的字体里会是`SemiBold`，有的是`Semibold`。
+
+注：一些字体名中含有`-`，在打印时会增加转义符显示为`\-`，使用这些字体时输入`-`即可。
+
+另外，也可以使用[FontDrop!](https://fontdrop.info)网站解析单个字体文件，获得字体名。解析样例字体*EBGaramondSC12-Regular.otf*时结果如下。
+
+```log
+You see EB Garamond SC
+
+Name: EB Garamond SmallCaps 12 Regular. Style name: 12 Regular. Version 0.016
+© Created by Georg Duffner with FontForge 2.0 (http://fontforge.sf.net)
+
+License: Copyright 2010-2013, Georg A. Duffner (<http://www.georgduffner.at/ebgaramond|g.duffner@gmail.com>), 2013 Siva Kalyan This Font Software 
+```
+
+其中`You see`后的是字体系列名，而`Name`与`. Style name`之间的`EB Garamond SmallCaps 12 Regular`即为字体本身在系统里的名称（对于风格字体，即为指定时使用的名称）。
+
+### 字体配置
+
+这里介绍两种字体配置方法。路径法适用于在多个工作环境中使用同一项目，安装法适用于在单一工作环境下维护多个项目。*Overleaf***仅支持路径法。**
+
+#### 路径法
+
+路径法增加一个`[Path=路径]`的可选参数，人为限制$\LaTeX$的搜索范围，设定主字体的方法如下。其中，路径使用绝对路径和（以编译文件的位置为起点的）相对路径均可，需要用代表文件夹的`\`结尾。
+
+`fontspec`包命令支持使用专属名和文件名，`ctex`包命令似乎是不支持专属名的。
+
+```tree
+主目录
+│   main.tex
+├───fonts
+│       myfont.otf
+└───...
+```
+
+在这样的文件结构下，使用以下写法设定字体。
+
+```latex
+\setmainfamily[Path=fonts/]{myfont}
+```
+
+文件名或路径仅使用ASCII编码能覆盖的字符为宜，**不要使用中文文件名或路径**。
+
+#### 安装法
+
+安装法即为将字体安装进系统中，通过字体名称调用。安装法可以自动检索系统路径`C:\Windows\Fonts\`下的字体和*TeXLive*安装时带的字体。如自定义字体，安装时需要选择**为所有用户安装**。
+
+由于安装法的字体名检查起来较为不易，推荐使用专属名。（用Everything的话可以无视这句）
+
+以下为设定主字体的方法。
+
+```latex
+\setmainfamily{字体名称}
+```
+
+#### 安装法配置的字体找不到怎么办？
+
+第一步，确定字体确实安装在了`C:\Windows\Fonts`文件夹里。
+
+第二步，检查代码中的拼写和`fc-list`命令获得的一样，特别是大小写。
+
+第三步，用[FontDrop!](https://fontdrop.info)网站解析单个字体文件，获得字体名，和`fc-list`里获得的可能会不一样。
+
+第四步，在字体专属名外面加个中括号。别问为什么，我也不懂，总而言之亲测有时候是有效的。
+
+```latex
+% 修改前
+\newCJKfontfamily\xbsong{Source Han Serif SemiBold}
+% 修改后
+\newCJKfontfamily\xbsong{[Source Han Serif SemiBold]}
+```
+
+第五步，改用文件名配置。
+
+第六步，天涯何处无芳草，字体到处都是，换一个吧。
+
+### `fontspec`包字符字体配置
+
+$\LaTeX$的字体配置默认是**只对部分字符生效**的，需要分别配置，混排时可以叠加指定。默认配置使用`fontspec`包，`ctex`包只对中日韩三语起效，与`fontspec`包的语法非常类似。
+
+非CJK字符（不止为ASCII，还包括章节符$\S$和摄氏度℃等国际通用符号），是默认使用基础字体渲染的，只有`fontspec`包配置的字体才能起效。
+
+```latex
+% 引入包
+\usepackage{fontspec}
+% 设置主字体
+\setmainfont{Vollkorn}
+```
+
+可以设置三种基础类别的字体：主字体`\setmainfont`用`\rmfamily`调用；无衬线字体`\setsansfont`用`\sffamily`调用；等宽字体`\setmonofont`用`\ttfamily`调用。一般设个主字体就够了，其他两种字体是默认格式中使用的，自定义格式时反正也要覆盖掉。
+
+用`\newfontfamily`配置新的字体。
+
+```latex
+% 设置字体，并自定义字体命令\medfont
+\newfontfamily\medfont{Vollkorn Medium}
+```
+
+$\LaTeX$默认寻找同系列的字体作为其加粗和斜体，但可以自行进行指定。
+
+```latex
+% 设置字体，并自行配置加粗和斜体
+\newfontfamily\medfont{Vollkorn Medium}[BoldFont=Vollkorn Semibold, ItalicFont=Vollkorn Semibold Italic]
+```
+
+使用非主字体时，只需要输入配置时设定的字体名即可。
+
+```latex
+\begin{document}
+    % 一次性使用
+    \fontspec{Vollkorn medium}[...]
+    % 预先设定好
+    \medfont medium weight text
+\end{document}
+```
+
+#### 连字（进阶）
+
+英文衬线字体中存在连字（ligature），通过设计优化某些字符串的显示方式来提升易读性。最经典的三个案例如下图（字体为*Vollkorn*）。
+
+![连字样例](data/fil.png)
+
+$\LaTeX$默认载入一部分通用连字（OTF中tag为liga），能提升英文文本的易读性。而一些字体对连字的设计比较充分，还使用了其他的连字tag。通常类别有：clig指上下文连字（contextual），能使手写体中产生连笔；dlig指自由连字（discretionary），会使文字更花俏；hlig指历史连字（historical）能令文字看起来较为复古；rlig标记必需连字（Required），可以实现“将英语字母拼合得到其他字母”，例如ae拼合为æ。
+
+![连字配置](data/ligatures.png)
+
+配置时可以添加一个`[Ligatures=XXX]`参数，启用一些其他tag里的连字，见上图。其中Common是默认打开的。
+
+可以用[FontDrop!](https://fontdrop.info)这个网站来查看字体内连字。有些字体虽然设计了连字，但并没有正确标注，导致这些连字虽然存在但却无法使用。面对这种情况，可以用[FontForge](https://fontforge.org/en-US/)软件进行[手动标注](https://fontforge.org/docs/tutorial/editexample4.html)。
+
+### `ctex`包字体配置
+
+中文字符，如`你`，`我`，`；`（中文分号），`《`（中文书名号），均需要使用`ctex`包内的命令进行字体配置才能正常显示。
+
+如果使用`ctex`包字库的话，字体命令已经预定义好了。主字体默认为宋体，加粗为黑体，斜体为楷体，等宽（`\ttfamily`）为仿宋。
+
+```latex
+\songti 宋体
+\heiti 黑体
+\fangsong 仿宋
+\kaishu 楷书
+
+% 只对 windows、founder 和 macnew 字库生效
+\lishu 隶书
+\youyuan 幼圆
+```
+
+如果选择自定义，首先要引入包时用`[fontset=none]`避免加载默认字体集，防止产生冲突。
+
+```latex
+\documentclass[fontset=none]{ctexZ}
+% 或
+\usepackage[fontset=none]{ctex}
+```
+
+字体配置的命令和`fontspec`包的差不多，加个`CJK`即可配置中文、日文、或韩文的字体，配置出的字体只会对这三种语言内的字符生效。
+
+```latex
+% 主字体
+\setCJKmainfont{Source Han Serif}[BoldFont=Source Han Serif SemiBold, ItalicFont=FZKai-Z03]
+
+% 以下是六种常用的GBK免费商用中文字体名
+
+% 思源系列字体有Source Han和Noto两个名字，是一样的
+% 不同国家和地区使用的同一汉字具有同一Unicode编码，但字形不同，用后缀区分使用情况
+% 语言包后缀：J（日语），K（韩语），SC（简体中文），HK（繁体中文-香港），TW（繁体中文-台湾）
+% 国家/地区后缀：JP（日本），KR（韩国），CN（中国），HK（香港地区），TW（台湾地区）
+% CN通常足够使用，SC较CN覆盖范围要更高一些
+\newCJKfontfamily\songti{Source Han Serif CN} % 思源宋体 CN
+\newCJKfontfamily\sheiti{Source Han Sans SC} % 思源黑体
+
+% 方正系列，GBK字符集
+% 有S（简体）T（繁体）两种后缀的字体，对应的是GB2312字符集，不建议用
+\newCJKfontfamily\shusong{FZShuSong-Z01}% 方正书宋
+\newCJKfontfamily\fangsong{FZFangSong-Z02} % 方正仿宋
+\newCJKfontfamily\heiti{FZHei-B01} % 方正黑体
+\newCJKfontfamily\kaiti{FZKai-Z03} % 方正楷体
+```
+
+其中，方正系列四个字体都只有一个字重，而思源两个系列都具有extralight，light，regular，medium，semibold，bold，heavy七个字重，可以进行指定。所有字体中都不含斜体。
+
+### 外语字符配置中文字体
+
+有的中文字体中也一并包含了同风格的外语字符设计。如果需要使用，将其用`fontspec`包内命令加载，然后叠加使用即可。
+
+```latex
+\newfontfamily\songtien{Source Han Serif}
+
+\songti\songtien 中英文mixed文本
+```
+
+### 高级配置
+
+本节介绍的高级配置最好是在阅览的过程中调整。
+
+#### pdf阅览器
+
+想看字体效果，先要有一个好使的pdf阅览器。
+
+打印的分辨率是300dpi，而屏幕的分辨率鲜少到达这个级别，因此屏幕上预览的pdf，精度比起打印机通常是压缩了的。由于渲染机制原因，不同pdf阅览器通常有着不同的压缩效果，建议找一个使用方便，且页面模式下与放大到300dpi下效果最相似的。个人经验中，Windows端的Acrobat DC Pro在英文花体字上发生了笔画显著过细的现象，而SumatraPDF和Edge，Firefox，Chrome均未出现此问题。
+
+一些阅览器（如SumatraPDF、Acrobat DC Pro）支持自定义屏幕分辨率，合理配置后以在屏幕上显示与实物等大的内容。屏幕分辨率根据显示器尺寸（即对角线长）、比例、勾股定理、像素数即可计算，单位dpi为dots per inch，即每英寸像素数。
+
+SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把`CustomScreenDPI = 0`改为`CustomScreenDPI = 屏幕分辨率`。Acrobat DC Pro的配置方式为`Ctrl+K`打开首选项，在自定义分辨率中输入`屏幕分辨率/系统缩放比例`。
+
+#### 中文
+
+中文的可选字体其实不少（[开源字体可以见此名单](https://drxie.github.io/OSFCC/)）。从各方面收集到的资料来看，方正系的字体适用范围最广、知名度最高，设计应该是最佳的。
+
+实际使用时，推荐将方正书宋（书宋即完全针对书籍印刷设计的宋体）作为主字体，指定方正楷体或仿宋作为斜体，以便于在正文中标注少量字符（如引用），这样易读性较佳。
+
+不过，方正书宋只有一个字重免费，固然技术上可以将较粗的思源宋体或方正黑体作为粗体使用，但思源系列与方正书宋字形相似又不同，夹杂使用令人不适；黑体也不适用于书记正文。如果对加粗有明确的需求，请挑一款多字重的字体（如思源宋体）作为主字体。不过，由于字形差异足够大，依然可以搭配方正字体作为斜体。
+
+装饰性文字（脚注、页眉页脚等）建议使用方正仿宋或楷体，注意与斜体区分。
+
+各级标题字体建议用不同字重的思源宋体来显示。
+
+内页不推荐使用黑体。
+
+#### 外语
+
+外语的免费字体很多，必然支持ASCII字符，绝大部分都支持拉丁字母及变形，一部分支持希腊和西里尔字母，选择字体时检查文本所用符号，确认字体支持即可。有一些进阶选项，恰当使用可以提升混排效果。
+
+这里介绍一些实用的花招，更详细的推荐阅读`fontspec`包文档。
+
+以下是一些样例，中文使用思源宋体Regular；英文字体均是从网站[1001 Fonts](https://www.1001fonts.com)下载的免费商用字体，全部使用Regular字重的默认配置。
+
+![字体对比](data/fonts.png)
+
+*Neuton*的字母偏小。配置时可用`[Scale=比例]`参数放大。
+
+*EB Garamond*的字母与中文相当契合，但数字采用了与英文相同的三格设计（俗称OldStyle），在数字与汉字混排时看起来会很诡异。可使用`[Numbers=Lining]`切换到等高数字。注意此方案起效建立在字体中含有等高数字的前提下，不是所有字体都支持。
+
+*Spectral*的字距比起中文明显偏高。可使用`[LetterSpace=改变值（如-3）]`来降低字母间距。另，如果想要调整空格宽度，使用`[WordSpace=空格宽度]`参数即可。
+
+思源系列是全语言支持，但是需缩小一点并降低字母间距，才适用于正文混排。默认比例适合于形如“Chapter 1  节俭”这样多语言分隔的格式，或极少量穿插其他语言的大段文本。
+
+方正系列虽然覆盖了字母的字符，但只做了中文字形设计，对外语的支持仅能当做显示保底，并不能看。四种免费字体内除ASCII外的全部字符，均与中文字符等宽。
 
 ## 页面排版
 
