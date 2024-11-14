@@ -4,9 +4,9 @@ layout: latex
 
 # 同人本$\LaTeX$排版教程<!-- omit in toc -->
 
-本文为懂得$\LaTeX$基础命令、语法，准备以此为排版工具，制作**书籍类同人本**的玩家撰写。考虑了等宽文字与不等宽文字（通常就是中英文）掺杂的情况。有少量场景与操作系统有关，本文暂只包括Windows下的处理方案。
+本文为准备制作**书籍类同人本**的玩家撰写。考虑了等宽文字与不等宽文字（通常就是中英文）掺杂的情况。有少量场景与操作系统有关，暂只包括Windows下的处理方案。
 
-推荐新手使用在线工具，因此其中不包含$\LaTeX$安装等入门内容。如果想要安装在本地的话，这部分教程在网上已经很多，不需要我再抄一遍。
+推荐新手使用在线工具，因此其中不包含$\LaTeX$安装等入门内容。如果想要需要在本地的话，这部分教程在网上已经很多，不需要我再抄一遍。
 
 我创立了一个模板，欢迎直接[下载使用](https://github.com/zhuty18/fanfiction-sample)。如果本文或者本模板对你出本有帮助，你出本时感谢我一下也挺好的。
 
@@ -105,11 +105,11 @@ layout: latex
   - [正文对齐](#正文对齐)
 - [篇末谈](#篇末谈)
   - [为什么写这篇文章？](#为什么写这篇文章)
-  - [为什么不用Typst？](#为什么不用typst)
+  - [为什么不用*Typst*？](#为什么不用typst)
     - [中文处理能力不足](#中文处理能力不足)
     - [与其他格式的转换路径空缺](#与其他格式的转换路径空缺)
     - [功能欠缺](#功能欠缺)
-  - [为什么不用别人都在推荐的*InDesign*呢？](#为什么不用别人都在推荐的indesign呢)
+  - [为什么不用别人都在推荐的*InDesign*？](#为什么不用别人都在推荐的indesign)
 
 ## $\LaTeX$的优点
 
@@ -259,7 +259,7 @@ $\LaTeX$是非常容易催生强迫症的，**千万不要追求完美**。谨�
 
 $\LaTeX$文件分导言区和正文区。导言区用于编写预设，正文区用于放置文档内容。
 
-```latex
+```TeX
 % 导言区
 % 想立刻看编译效果的话，增加下面这行
 % \documentclass{ctexbook}
@@ -314,7 +314,7 @@ $\TeX$会先按顺序加载导言区的内容，前文的定义将影响后文�
 
 文档类型通常在文件的第一行定义。
 
-```latex
+```TeX
 \documentclass[10pt]{book}
 ```
 
@@ -328,7 +328,7 @@ $\LaTeX$原生有着`article`、`book`、`report`三种文档类别。三种类�
 
 $\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要XeLaTeX或LuaLaTeX引擎才能编译。使用方法为
 
-```latex
+```TeX
 % 方案一
 % 在建立文档时指定使用ctex，Z代指文档类型
 \documentclass{ctexZ}
@@ -343,7 +343,7 @@ $\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要XeLaTe
 
 `ctex`的文档类别除了10,11,12pt外，还支持word款的两种正文字号，配置方法如下
 
-```latex
+```TeX
 % 正文五号字
 \documentclass[zihao=5]{ctexbook}
 % 正文小四号字
@@ -356,7 +356,7 @@ $\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要XeLaTe
 
 在文档字号不同时，各个字号命令对应的字号如上图。此外，可以用`\fontsize`命令手动定义文字大小，如下。
 
-```latex
+```TeX
 \fontsize{字号}{所占高度}
 ```
 
@@ -372,7 +372,7 @@ $\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要XeLaTe
 
 注意水平方向`left, right`和`inner, outer`这两组是二选一的关系。双页印刷应当使用`inner, outer`这组参数，能根据页面单双自动调整文字区域位置。
 
-```latex
+```TeX
 % 引入包
 \usepackage{geometry}
 \geometry{
@@ -400,7 +400,7 @@ $\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要XeLaTe
 
 `\geometry`命令会决定纸张的大小，这点不可修改。边距等版式数值可以在文档内部用`\newgeometry`命令进行修改，如
 
-```latex
+```TeX
 \begin{document}
     % ...
     % 新的边距会从当前页起效
@@ -434,7 +434,7 @@ $\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要XeLaTe
 
 新`part`会重置一部分前文的格式定义，可以通过把命令写进`part`宏的方式提升复用性。
 
-```latex
+```TeX
 % 重载part宏
 \let\origpart\part
 \renewcommand*{\part}[2][]{
@@ -453,7 +453,7 @@ $\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要XeLaTe
 
 对于标题格式，用`\titleformat`命令来配置。
 
-```latex
+```TeX
 % 参数
 \titleformat{命令}[形式]{格式}{标题序号}{间距}{前命令}[后命令]
 % 示例
@@ -462,7 +462,7 @@ $\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要XeLaTe
 
 对于标题与上下文的间距，使用`\titlespacing`命令。
 
-```latex
+```TeX
 % 参数
 % 注：左间距的相对点是这一行文字的起始位置，即段首缩进后的
 \titlespacing*{命令}{左间距}{上间距}{下间距}[右间距]
@@ -472,7 +472,7 @@ $\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要XeLaTe
 
 标题上的编号默认为*1.1.1*类，即子级编号会带上上级，用以下命令来去除子级的上级编号。
 
-```latex
+```TeX
 \counterwithout{子级别}{亲级别}
 ```
 
@@ -484,7 +484,7 @@ $\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要XeLaTe
 
 `\chapter`及以上级别的标题会自动新起一张纸。`book`类文档中默认为双页模式，右页为新纸。当上文结束在奇数页时，会产生一页空白页。不想要的话，可以在定义`documentclass`的时候增加一个参数`openany`，允许在偶数页开启新内容。
 
-```latex
+```TeX
 \documentclass[...,openany]{...}
 ```
 
@@ -492,7 +492,7 @@ $\LaTeX$中使用中文时需要的内容集成在了`ctex`包里，需要XeLaTe
 
 若希望后文在左页上开始，可以使用以下写法：
 
-```latex
+```TeX
 % 新起一页
 \clearpage
 % 如果页码为奇数
@@ -633,7 +633,7 @@ License: Copyright 2010-2013, Georg A. Duffner (<http://www.georgduffner.at/ebga
 
 在这样的文件结构下，使用以下写法设定字体。
 
-```latex
+```TeX
 \setmainfamily[Path=fonts/]{myfont}
 ```
 
@@ -647,7 +647,7 @@ License: Copyright 2010-2013, Georg A. Duffner (<http://www.georgduffner.at/ebga
 
 以下为设定主字体的方法。
 
-```latex
+```TeX
 \setmainfamily{字体名称}
 ```
 
@@ -661,7 +661,7 @@ License: Copyright 2010-2013, Georg A. Duffner (<http://www.georgduffner.at/ebga
 
 第四步，在字体专属名外面加个中括号。别问为什么，我也不懂，总而言之亲测有时候是有效的。
 
-```latex
+```TeX
 % 修改前
 \newCJKfontfamily\xbsong{Source Han Serif SemiBold}
 % 修改后
@@ -678,7 +678,7 @@ $\LaTeX$的字体配置默认是**只对部分字符生效**的，需要分别�
 
 非CJK字符（不止为ASCII，还包括章节符$\S$和摄氏度℃等国际通用符号），是默认使用基础字体渲染的，只有`fontspec`包配置的字体才能起效。
 
-```latex
+```TeX
 % 引入包
 \usepackage{fontspec}
 % 设置主字体
@@ -689,21 +689,21 @@ $\LaTeX$的字体配置默认是**只对部分字符生效**的，需要分别�
 
 用`\newfontfamily`配置新的字体。
 
-```latex
+```TeX
 % 设置字体，并自定义字体命令\medfont
 \newfontfamily\medfont{Vollkorn Medium}
 ```
 
 $\LaTeX$默认寻找同系列的字体作为其加粗和斜体，但可以自行进行指定。
 
-```latex
+```TeX
 % 设置字体，并自行配置加粗和斜体
 \newfontfamily\medfont{Vollkorn Medium}[BoldFont=Vollkorn Semibold, ItalicFont=Vollkorn Semibold Italic]
 ```
 
 使用非主字体时，只需要输入配置时设定的字体名即可。
 
-```latex
+```TeX
 \begin{document}
     % 一次性使用
     \fontspec{Vollkorn medium}[...]
@@ -732,7 +732,7 @@ $\LaTeX$默认载入一部分通用连字（OTF中tag为liga），能提升英�
 
 如果使用`ctex`包字库的话，字体命令已经预定义好了。主字体默认为宋体，加粗为黑体，斜体为楷体，等宽（`\ttfamily`）为仿宋。
 
-```latex
+```TeX
 \songti 宋体
 \heiti 黑体
 \fangsong 仿宋
@@ -745,7 +745,7 @@ $\LaTeX$默认载入一部分通用连字（OTF中tag为liga），能提升英�
 
 如果选择自定义，首先要引入包时用`[fontset=none]`避免加载默认字体集，防止产生冲突。
 
-```latex
+```TeX
 \documentclass[fontset=none]{ctexZ}
 % 或
 \usepackage[fontset=none]{ctex}
@@ -753,7 +753,7 @@ $\LaTeX$默认载入一部分通用连字（OTF中tag为liga），能提升英�
 
 字体配置的命令和`fontspec`包的差不多，加个`CJK`即可配置中文、日文、或韩文的字体，配置出的字体只会对这三种语言内的字符生效。
 
-```latex
+```TeX
 % 主字体
 \setCJKmainfont{Source Han Serif}[BoldFont=Source Han Serif SemiBold, ItalicFont=FZKai-Z03]
 
@@ -781,7 +781,7 @@ $\LaTeX$默认载入一部分通用连字（OTF中tag为liga），能提升英�
 
 有的中文字体中也一并包含了同风格的外语字符设计。如果需要使用，将其用`fontspec`包内命令加载，然后叠加使用即可。
 
-```latex
+```TeX
 \newfontfamily\songtien{Source Han Serif}
 
 \songti\songtien 中英文mixed文本
@@ -851,7 +851,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 推荐使用`\setspace`包来调整行高。
 
-```latex
+```TeX
 % 定义好的命令
 \singlespacing % 单倍行高
 \onehalfspacing % 1.5倍行高
@@ -871,7 +871,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 改变`\parskip`即可，默认为0pt。段距应为**行高的整数倍**，不然特别的丑。
 
-```latex
+```TeX
 \setlength{\parskip}{段距}
 ```
 
@@ -880,7 +880,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 1. 设置段距时，给出弹性空间。不要让最短段距低于0，会使得段间空白小于行间。
 2. 使用命令允许每页下缘不齐。**不推荐**，在页面布局做不到行对齐时，该命令会使得整体看起来像狗啃的一样。
 
-```latex
+```TeX
 % 设置弹性空间
 \setlength{\parskip}{段距 plus 最多加大值 minus 最多减少值}
 % 下缘不对齐
@@ -891,13 +891,13 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 用`identfirst`包来放开首段的缩进。
 
-```latex
+```TeX
 \usepackage{indentfirst}
 ```
 
 段首缩进的长度也可以调整，但不是很需要。中文文档用默认的2字宽是最合适的。
 
-```latex
+```TeX
 \setlength\parindent{长度}
 ```
 
@@ -905,13 +905,13 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 在文档中，可以用`\setcounter`来修改页码，后续页的页码和目录中的页码都会跟着改变。在目录后使用该命令，可以很简便地确定正文首页为第1页。
 
-```latex
+```TeX
 \setcounter{page}{本页的新页码}
 ```
 
 如果某处存在若干页使用其他方式排版（如图文混排时的图片部分），需要将这部分页码空置预留出来，可以使用`\addcounter`增加页码。
 
-```latex
+```TeX
 \addcounter{page}{增加量}
 ```
 
@@ -947,13 +947,13 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 孤字：`ctex`包中对于一行内能填充的空白是可规定的，默认为`1\ccwd`，把这个数改小一些能让标点更加紧凑，部分文本将让一行纳更多的字符，或可避免孤字的出现。支持规定为数（默认单位为`\ccwd`）或长度。
 
-```latex
+```TeX
 \ctexset{linestretch=伸展量}
 ```
 
 `ctex`包中集成了`CJKpunct`包，可以改变标点风格，把风格改变为开明式（句末全角、句中半角），也能让部分行多容纳一点字符，或可避免孤字。
 
-```latex
+```TeX
 \punctstyle{kaiming}
 ```
 
@@ -961,7 +961,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 拉丁排版中，不希望一个多行段落在一页上只有一行。以下代码会通过调整段距的方法来解决该问题。
 
-```latex
+```TeX
 % 禁止在一段的正数第一二行间换页
 \clubpenalty=10000
 % 禁止在一段的倒数第一二行间换页
@@ -982,7 +982,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 引入`changepage`包
 
-```latex
+```TeX
 \begin{adjustwidth}{左侧缩进量}{右侧缩进量}
     % 字体字号等配置
     % 引用内容
@@ -993,7 +993,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 适用于短引用，打包成文本框，作为浮动对象参与排版。
 
-```latex
+```TeX
 \begin{minipage}[位置]{宽度}
     % 字体字号等配置
     % 引用内容
@@ -1012,19 +1012,19 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 引入`footnpag`包可以在每页重置脚注编号。
 
-```latex
+```TeX
 \usepackage{footnpag}
 ```
 
 脚注高度通常不是整行高，会拉扯当页的行宽，可以用以下代码避免
 
-```latex
+```TeX
 \usepackage[bottom]{footmisc}
 ```
 
 脚注所使用的字体可以自行设定，方法如下
 
-```latex
+```TeX
 \usepackage{etoolbox}
 \makeatletter
     \patchcmd{\@footnotetext}{\footnotesize}{指定字体和字号}{}{}
@@ -1033,7 +1033,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 使用以下代码令脚注使用罗马数字
 
-```latex
+```TeX
 \renewcommand{\thefootnote}{\roman{footnote}}
 ```
 
@@ -1045,19 +1045,19 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 尾注标题使用以下命令进行修改。
 
-```latex
+```TeX
 \renewcommand{\notesname}{尾注标题}
 ```
 
 尾注标题默认影响`\leftmark`（该命令的用处见页眉页脚一章），可以用以下命令规避。
 
-```latex
+```TeX
 \renewcommand{\enoteheading}{\section*{\notesname}\mbox{}\par\vskip-\baselineskip}
 ```
 
 尾注编号可以用如下代码重置：
 
-```latex
+```TeX
 \makeatletter
     % 每章重置尾注编号，chapter可修改为其他标题级别
     \@addtoreset{endnote}{chapter}
@@ -1066,7 +1066,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 使用以下代码令尾注使用罗马数字
 
-```latex
+```TeX
 \renewcommand{\theendnote}{\roman{endnote}}
 ```
 
@@ -1080,7 +1080,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 使用如下命令来调整目录页的标题内容，其格式默认与`\chapter`级标题相同。`ctex`文档类别中，目录页标题会翻译为“目录”，也可用如下命令来修改。
 
-```latex
+```TeX
 \renewcommand{\contentsname}{目录标题}
 ```
 
@@ -1088,13 +1088,13 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 用如下命令设置目录层深，层深数值见前文。
 
-```latex
+```TeX
 \setcounter{tocdepth}{层深}
 ```
 
 目录格式配置包并不唯一，我使用的是`titletoc`，配置目录中标题格式的命令是`\titlecontents`。
 
-```latex
+```TeX
 % 代码
 \titlecontents{标题名}[左距离]{上方代码}
 {序号格式}{无序号的标题格式}
@@ -1112,13 +1112,13 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 其中，无序号标题默认不出现在目录里，想要的话需要手动添加。可使用以下命令。
 
-```latex
+```TeX
 \addcontentsline{toc}{级别}{标题名}
 ```
 
 目录中的标题名默认会显示在序号区和页码区之间，内容默认与正文中的标题名相同，可以不同，有些时候也需要不同。如注只能放在正文中的标题里，而不能出现在目录索引里。
 
-```latex
+```TeX
 \chapter[索引中的名称]{正文中的名称}
 ```
 
@@ -1126,7 +1126,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 当改变页码字体时，可能会出现`\hbox underfull`警告，可以用以下代码改变默认的页码宽度。
 
-```latex
+```TeX
 \makeatletter
     \renewcommand{\contentspage}[1][\thecontentspage]{\hb@xt@\@pnumwidth{#1\hfil}}
     \renewcommand{\@pnumwidth}{页码宽度}
@@ -1137,7 +1137,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 `titletoc`包支持局部目录，用法如下。
 
-```latex
+```TeX
 % 开始记录标题属于某个局部
 \startcontents[局部名称] % 这是一个key，不要加转义符，使用时保持一致即可
 % 结束记录某个局部的标题
@@ -1157,7 +1157,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 超链接会带来格式的变化，可以使用一条命令来避免。
 
-```latex
+```TeX
 % 启用超链接
 \usepackage{hyperef}
 % 超链接不影响格式
@@ -1168,7 +1168,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 可以在正文中手动向目录中增加换页符，确定换页位置。
 
-```latex
+```TeX
 \addtocontents{toc}{\protect\newpage}
 ```
 
@@ -1180,7 +1180,7 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 用`\fancypagestyle`命令设计新的页面风格。
 
-```latex
+```TeX
 % 页面风格名为mystyle
 \fancypagestyle{mystyle}{
     % 清空既有设置
@@ -1199,20 +1199,20 @@ SumatraPDF的配置方式为`目录-设置-高级选项`，在配置文件中把
 
 标记的记录机制与目录中的相同，默认使用正文中的名称，也可专门定义索引名时。
 
-```latex
+```TeX
 \chapter[索引的名称]{正文中的名称}
 ```
 
 `\Xmark`默认为`X 序号. 索引中的标题名称`，可以用重定义的方法来去除章标记中`X 序号.`的部分，节标记同理。
 
-```latex
+```TeX
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{#1}}
 ```
 
 $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
-```latex
+```TeX
 % 定义变量
 \newcommand{\parttitle}{}
 
@@ -1231,7 +1231,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 也可以在正文中随时使用如下代码来修改左右两种标记。
 
-```latex
+```TeX
 \markboth{新的左标记}{新的右标记}
 \markright{新的右标记}
 ```
@@ -1258,13 +1258,13 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 页眉下默认有一条横线，可以用以下命令来设置横线宽度，0为去除。
 
-```latex
+```TeX
 \renewcommand{\headrulewidth}{宽度}
 ```
 
 如果希望页眉页脚溢出在文字区外，可以使用以下写法：
 
-```latex
+```TeX
 \fancyhfoffset[位置]{溢出值} % 用H/F这组位置标记来明确是页眉还是页脚
 % 单独设置页眉或页脚的溢出
 \fancyheadoffset[位置]{溢出值}
@@ -1277,7 +1277,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 ### 插入图片
 
-```latex
+```TeX
 % 封一个figure环境，环境内的命令不影响外部
 \begin{figure}[图片位置]
     % 水平居中
@@ -1299,7 +1299,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 图片标题用`caption`这个包来风格化，用法如下。
 
-```latex
+```TeX
 % 导入包
 \usepackage{caption}
 % 设置
@@ -1314,7 +1314,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 `graphics`内置了一个旋转功能，使用方法如下。
 
-```latex
+```TeX
 \rotatebox{逆时针旋转角度（角度制）}{旋转内容}
 ```
 
@@ -1326,7 +1326,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 空白页要包含若干要素，建议直接写成命令，方便使用。
 
-```latex
+```TeX
 \newcommand{\blankpage}{
     % 新起一页
     \newpage
@@ -1343,7 +1343,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 有人（比如我）喜欢用空一段的方式分节。在$\LaTeX$中，文字后的空行，不管多少，都视为且只视为一个回车，空一段需要使用如下写法。
 
-```latex
+```TeX
 上一节最后一行
 
 % 方案一，空白符
@@ -1358,7 +1358,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 绝大多数中文标点都能在$\LaTeX$中按标准方式渲染，但是破折号基本都不会和标准使用方法一样，等同于两个字宽。这与字体和连字均有关系，[有兴趣可以阅读这篇帖子](https://github.com/CTeX-org/ctex-kit/issues/382)。想完美解决很复杂，但是想简单解决真的很简单。
 
-```latex
+```TeX
 % 直接把破折号用盒子框起来，默认居中
 \makebox[2\ccwd]{——}
 % rule命令画线，可以自行根据字体设计破折号的高度、粗细、长短。
@@ -1377,7 +1377,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 设定命令，让`\mysymbol`用指定字体渲染。注意大括号需要有两层，限制字体应用范围。
 
-```latex
+```TeX
 \newcommand{\mysymbol}{{\symfont 符号}}
 ```
 
@@ -1391,7 +1391,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 可以增加一个`sloppypar`域来一劳永逸，即
 
-```latex
+```TeX
 \begin{document}
     \begin{sloppypar}
         内容
@@ -1413,7 +1413,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 虽然可以选择用`\maketitle`命令生成一页现成的扉页，但是真的很丑。中文出版物的扉页通常是封面的黑白朴素版，内外呼应，我个人推荐按此办理。根据封面的设计来手动布局，或直接导出一页适于黑白印刷的封面pdf文件（注意出血），插入正文开头作为扉页。
 
-```latex
+```TeX
 \usepackage[pdfpages]
 \begin{document}
 \includepdf[
@@ -1429,7 +1429,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 最简单的方法是用`\input`命令，将另一个`.tex`文件引入当前文件，效果相当于用该文件的全部内容替换`\input`这一行。
 
-```latex
+```TeX
 % 子文件，head.tex
 \documentclass[10pt]{book}
 \usepackage{hyperref}
@@ -1441,7 +1441,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 对于较厚的本，可以使用`\subfiles`来分割出子文档，该包可以在不影响整体编译的情况下，独立编译子文档。由于换页的位置会直接影响效果，每个子文档的内容，在主文档中都应当开始于新的一页或新的一张纸。
 
-```latex
+```TeX
 % 以main.tex为主文档
 % 在同层级的Chapter文件夹内，创建ch1.tex为子文档
 
@@ -1474,13 +1474,13 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 下文教程将以`\baselineskip`（行高）作为纵向的基本单位，所以第一步是将行高调整的命令放到序言区开头。
 
-```latex
+```TeX
 \setstretch{行高倍数}
 ```
 
 段距设定为行高的整倍数，**不留弹性**。
 
-```latex
+```TeX
 \setlength{\parskip}{0pt}
 ```
 
@@ -1490,7 +1490,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 版心高度（`textheight`）应为`规划行数*行高-行距`，$\LaTeX$是可以算数的。
 
-```latex
+```TeX
 % 建立长度变量
 \newlength{\theight}
 % 输入行数
@@ -1513,13 +1513,13 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 使用现成字号方案的话，由于不同主字号下，各级字号的的大小没什么关系，这里无法给出普适性的精确方案。（需要的话，建议自己算）但可以给非正文区域上下添加弹性空白。如果一页纸上只有正文和单个空白弹性的块，且正文溢出到下页的话，这个做法可以令弹性空白很精确。
 
-```latex
+```TeX
 {基础长度 plus 扩张长度 minus 压缩长度}
 ```
 
 更朴实的方案是把所有非正文用盒子或`minipage`括起来，固定其所占高度。
 
-```latex
+```TeX
 \begin{minipage}[对齐标准，建议用c][所占高度]{所占宽度}
     内容
 \end{minipage}
@@ -1535,7 +1535,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 
 这是$\TeX$系列的精神内核，不是因为利益，而是因为需求。**因为我需要，而且我相信别人也需要。**整个$\TeX$社区就是基于这样的心态所建立的，我这篇文章也是同理。
 
-### 为什么不用Typst？
+### 为什么不用*Typst*？
 
 因为[*Typst*](https://typst.app/)还是太菜了。
 
@@ -1579,7 +1579,7 @@ $\LaTeX$中没有预设记录`part`标题的变量，可以自己设置
 4. 无标号时，无法实现文件内跳转。
 5. 很难按左右页设置页眉页脚。
 
-### 为什么不用别人都在推荐的*InDesign*呢？
+### 为什么不用别人都在推荐的*InDesign*？
 
 因为作为外行，我在研究*InDesign*时，**只**感到它**特别愚蠢**。
 
