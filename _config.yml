@@ -15,7 +15,7 @@ redirect_back: /
 
 nav-foot:
     - name: ⬆️
-      link: "#content"
+      link: "#main_content"
     - name: 🏠
       link: /
     # - name: 📚
