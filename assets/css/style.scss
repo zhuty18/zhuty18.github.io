@@ -37,3 +37,37 @@ a.nav-foot-link {
 .main-content .nav-foot :first-child {
     margin-top: auto;
 }
+
+.ad-text {
+    float: right;
+    font-size: 0.9rem;
+    line-height: 100%;
+    padding-left: 5%;
+}
+.ad {
+    color: brown;
+    background: antiquewhite;
+    padding-left: 0.5rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.head img {
+    border-radius: 50%;
+}
+.head {
+    float: left;
+    width: 20%;
+}
+.weibo-ad {
+    background: antiquewhite;
+    overflow: hidden;
+    height: 0px;
+    display: flex;
+}
+.blank {
+    height: 1rem;
+}
+.ad-content {
+    width: 75%;
+}
