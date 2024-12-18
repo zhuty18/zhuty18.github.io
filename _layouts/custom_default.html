@@ -2,6 +2,10 @@
 layout: default
 ---
 
+{% if site.ad %}
+  {% include ad.html %}
+{% endif %}
+
 {{ content }}
 
 <div class="nav-foot">

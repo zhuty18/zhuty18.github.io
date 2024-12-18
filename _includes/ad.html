@@ -1,0 +1,30 @@
+<div class="ad" onclick="onShowChange()">
+  我的<b>蝙绿本</b>正在贩售，点击<span id="action">展开详情</span>
+  <div id="{{ site.ad }}" class="weibo-ad">
+    <span class="head"><img src="{{ site.baseurl }}/data/headshot.jpg"></span>
+    <div class="ad-content">
+      <div class="blank"></div>
+        <span class="ad-text">
+          <p>你好，我是兔子草。你可能在<a href="https://atomic-tuzicao.lofter.com/">LOF（兔子草）</a>或者<a href="http://www.mtslash.me/home.php?mod=space&uid=421012&do=thread">随缘（Atomic）</a>见过我写的蝙绿文。</p>
+          <p>我的蝙绿本正在销售中：可以在<strong>广州SFCF02 B27</strong>现场购买，或加入群<strong>745456171</strong>获取网售链接。
+          </p>
+          <p>
+            <a href="{{ site.ad_url }}">点此跳转微博，查看详情！</a>
+          </p>
+        </span>
+    </div>
+  </div>
+  <script>
+    function onShowChange () {
+    var ad = document.getElementById("{{ site.ad }}")
+    var con = document.getElementById("action")
+    if (ad.style.height === "100%") {
+      ad.style.height = "0px"
+      con.innerText = "展开详情"
+      } else {
+      ad.style.height = "100%"
+      con.innerText = "收起介绍"
+      }
+    }
+  </script>
+</div>
