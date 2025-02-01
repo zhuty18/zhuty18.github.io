@@ -28,6 +28,6 @@ defaults:
       values:
           layout: "custom_default"
 
-ad: purchase
-ad_url: https://weibo.com/6193467293/5108192609304587
-ddl: 2025-01-03
+# ad: purchase
+# ad_url: https://weibo.com/6193467293/5108192609304587
+# ddl: 2025-01-03
