@@ -6,7 +6,7 @@ import subprocess
 import time
 
 POST_PATH = "_posts/"
-PREVIEW_LENGTH = 120
+PREVIEW_LENGTH = 80
 
 
 def preview(filename):
@@ -20,26 +20,15 @@ def preview(filename):
                 continue
             if yaml:
                 continue
-            if "<!-- " in l:
-                if " -->" in l:
-                    continue
-                yaml = True
-            if " -->" in l:
-                yaml = False
-                continue
             if l.startswith("#"):
                 pre += "<br>\n"
                 continue
             pre += l
             if "<br>\n\n" in pre:
-                pre = pre.split("<br>\n\n")[-1]
-            if len(pre) > PREVIEW_LENGTH * 0.8:
+                pre = pre.split("<br>")[1].strip()
+            if len(pre) > PREVIEW_LENGTH * 0.6:
                 pre = pre.strip()
                 break
-    for l in pre.split("\n\n"):
-        if len(l) > PREVIEW_LENGTH * 0.2:
-            pre = l.strip()
-            break
     if len(pre) > PREVIEW_LENGTH * 1.2:
         pre = pre[:PREVIEW_LENGTH] + "……"
     if pre.count("*") % 2 == 1:
@@ -85,9 +74,12 @@ def post(filename):
 target: /{target}
 title: {title}
 date: {date}
+excerpt_separator: <!--more-->
 ---
 
 {preview(filename)}
+
+<!--more-->
 """
         )
     print(f"Posted: {post_name}")
