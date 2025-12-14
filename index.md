@@ -9,3 +9,5 @@ layout: home
 [合成大莫戈](mogo)
 
 [合成小哈尔](mogo/hal.html)
+
+[翡翠骑士](EmeraldKnight/web/index.html)
