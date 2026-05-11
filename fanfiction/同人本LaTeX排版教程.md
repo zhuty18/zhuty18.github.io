@@ -659,7 +659,7 @@ License: Copyright 2010-2013, Georg A. Duffner (<http://www.georgduffner.at/ebga
 
 #### 配置的字体找不到？
 
-第一步，确定字体确实安装在了`C:\Windows\Fonts`文件夹里。
+第一步，确定字体确实安装在了`C:\Windows\Fonts`文件夹里。且字体文件名（`.otf`前的部分）是纯ASCII字符（有一段时间，中文命名的字体文件可以被正常调用，但2026.5.12发现不支持了，所以还是建议修改为纯ASCII字符）。
 
 第二步，检查代码中的拼写和`fc-list`命令获得的一样，特别是大小写。
 
